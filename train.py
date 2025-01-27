@@ -71,6 +71,7 @@ def train():
         model.eval()
         test_img1 = transform(Image.open("Wppr.jpg").convert("RGB")).unsqueeze(0)
         print(model.caption_image(test_img1.to(device), dataset.vocab))
+        exit()
 
     model.train()
 
