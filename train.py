@@ -76,7 +76,6 @@ def train():
     model.train()
 
     for epoch in range(num_epochs):
-        # Uncomment the line below to see a couple of test cases
         # print_examples(model, device, dataset)
 
         if save_model:

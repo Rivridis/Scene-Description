@@ -161,3 +161,4 @@ cython_debug/
 
 runs/
 /my_checkpoint.pth.tar
+/test
