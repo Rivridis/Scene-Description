@@ -1,8 +1,6 @@
 import cv2
 import train
-import time
 import threading
-import os
 import helper
 
 # Replace with your video stream URL
