@@ -4,9 +4,9 @@ import time
 import threading
 import os
 import helper
-import tkinter
+
 # Replace with your video stream URL
-video_url = 'http://192.168.6.151:8080/video'
+video_url = 'http://192.168.137.230:8080/video'
 
 frame_count = 0
 save_interval = 30  # Save every 30 frames
