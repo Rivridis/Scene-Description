@@ -8,9 +8,10 @@ from utils import save_checkpoint, load_checkpoint, print_examples
 from get_loader import get_loader
 from model import CNNtoRNN
 from PIL import Image
+import time
 
 
-def train():
+def train(img = ""):
     transform = transforms.Compose(
         [
             transforms.Resize((356, 356)),
@@ -39,8 +40,8 @@ def train():
     vocab_size = len(dataset.vocab)
     num_layers = 1
     learning_rate = 3e-4
-    num_epochs = 100
-
+    num_epochs = 250
+ 
     # for tensorboard
     writer = SummaryWriter("runs/flickr")
     step = 0
@@ -59,19 +60,19 @@ def train():
 
     if load_model:
         step = load_checkpoint(torch.load("my_checkpoint.pth.tar"), model, optimizer)
+        while True:
+            time.sleep(5)
+            transform = transforms.Compose(
+            [
+                transforms.Resize((299, 299)),
+                transforms.ToTensor(),
+                transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
+            ]
+        )
 
-        transform = transforms.Compose(
-        [
-            transforms.Resize((299, 299)),
-            transforms.ToTensor(),
-            transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
-        ]
-    )
-
-        model.eval()
-        test_img1 = transform(Image.open("Wppr.jpg").convert("RGB")).unsqueeze(0)
-        print(model.caption_image(test_img1.to(device), dataset.vocab))
-        exit()
+            model.eval()
+            test_img1 = transform(Image.open(img).convert("RGB")).unsqueeze(0)
+            print(model.caption_image(test_img1.to(device), dataset.vocab))
 
     model.train()
 
