@@ -3,18 +3,16 @@ import train
 import threading
 import helper
 
-# Replace with your video stream URL
-video_url = 'http://192.168.137.230:8080/video'
+video_url = 'http://192.168.137.235:8080/video'
 
 frame_count = 0
-save_interval = 30  # Save every 30 frames
+save_interval = 30  
 
-# Open the video stream
 cap = cv2.VideoCapture(video_url)
 
 def train_model(file_path):
 
-    helper.generate(file_path)  # Make sure this function works independently
+    helper.generate(file_path) 
 
 if not cap.isOpened():
     print("Error: Unable to open video stream.")
