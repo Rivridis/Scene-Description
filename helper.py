@@ -5,6 +5,8 @@ import threading
 import pyttsx3
 from PIL import Image
 
+context_aware = "The time is 2:00 PM, and the weather is bright and sunny. The user is indoor"
+
 checkpoint = r"C:\Users\sanja\.cache\huggingface\hub\models--MBZUAI--LaMini-Flan-T5-248M\snapshots\4e871ba5f20216feaa3b845fc782229cd64eba47"
 
 model2 = pipeline('text2text-generation', model = checkpoint)
@@ -23,11 +25,12 @@ style_prompts = {
     "poetic": "Rewrite this caption in a poetic way: ",
     "funny": "Make this a funny caption: ",
     "detailed": "Rewrite this caption in a detailed way: ",
-    "minimal": "Make this as short and minimal as possible: "
+    "minimal": "Make this as short and minimal as possible: ",
+    "emotion" : "If there is a human in the image, describe their emotions: ",
 }
 
 
-current_style = "poetic" 
+current_style = "detailed" 
 
 def update_style(selected):
     global current_style
@@ -44,6 +47,7 @@ def generate(img="frame.jpg"):
             caption_text = processor.decode(caption[0], skip_special_tokens=True)
             
             print(caption_text)
+            # Remember to add context here
             input_prompt = style_prompts[current_style] + caption_text
             generated_text = model2(input_prompt, max_length=512, do_sample=True)[0]['generated_text']
             print(generated_text)
