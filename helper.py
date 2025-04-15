@@ -5,7 +5,7 @@ import threading
 import pyttsx3
 from PIL import Image
 
-context_aware = "The time is 2:00 PM, and the weather is bright and sunny. The user is indoor"
+context_aware = "Information: The time is 2:00 PM, and the weather is bright and sunny. The user is indoor"
 
 checkpoint = r"C:\Users\sanja\.cache\huggingface\hub\models--MBZUAI--LaMini-Flan-T5-248M\snapshots\4e871ba5f20216feaa3b845fc782229cd64eba47"
 
@@ -53,7 +53,7 @@ def generate(img="frame.jpg"):
             print(generated_text)
         
             root.after(0, caption_label.config, {"text": generated_text})
-            engine.say(caption_text)
+            engine.say(generated_text)
             engine.runAndWait()
 
     root = tk.Tk()
